@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 const cities = [
   { name: "Avranches", slug: "avranches" },
+  { name: "Ducey", slug: "ducey" },
   { name: "Pontorson", slug: "pontorson" },
   { name: "Fougères", slug: "fougeres" },
   { name: "Saint-Hilaire-du-Harcouët", slug: "saint-hilaire-du-harcouet" },
-  { name: "Ducey", slug: "ducey" },
+  { name: "Pontaubault", slug: "pontaubault" },
   { name: "Antrain", slug: "antrain" },
 ];
 
@@ -26,7 +27,7 @@ const Zone = () => (
         {cities.map((c) => (
           <Link
             key={c.slug}
-            to={`/plombier-${c.slug}`}
+            to={`/interventions/${c.slug}`}
             className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-5 py-3 font-semibold text-card-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition shadow-sm"
           >
             <MapPin className="h-4 w-4" /> Plombier à {c.name}

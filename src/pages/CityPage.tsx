@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Phone, MapPin, ArrowLeft, Droplets, Flame, Zap, Wrench } from "lucide-react";
 import Header from "@/components/Header";
@@ -6,12 +6,13 @@ import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
 
 // City metadata — extend this map to add new city pages.
-const CITIES: Record<string, { name: string; intro: string }> = {
+export const CITIES: Record<string, { name: string; intro: string }> = {
   avranches: { name: "Avranches", intro: "Plombier chauffagiste électricien à Avranches et alentours." },
+  ducey: { name: "Ducey", intro: "Plomberie, chauffage et électricité à Ducey-Les Chéris." },
   pontorson: { name: "Pontorson", intro: "Artisan multi-services à Pontorson, baie du Mont-Saint-Michel." },
   fougeres: { name: "Fougères", intro: "Interventions rapides à Fougères et son agglomération." },
   "saint-hilaire-du-harcouet": { name: "Saint-Hilaire-du-Harcouët", intro: "Dépannage et installations à Saint-Hilaire-du-Harcouët." },
-  ducey: { name: "Ducey", intro: "Plomberie, chauffage et électricité à Ducey-Les Chéris." },
+  pontaubault: { name: "Pontaubault", intro: "Plombier chauffagiste à Pontaubault et vallée de la Sélune." },
   antrain: { name: "Antrain", intro: "Artisan de confiance à Antrain et secteur." },
 };
 
@@ -23,28 +24,20 @@ const services = [
 ];
 
 const CityPage = () => {
-  const { slug = "" } = useParams();
+  const { city: slug = "" } = useParams();
   const city = CITIES[slug];
 
   useEffect(() => {
     if (city) {
-      document.title = `Plombier à ${city.name} — Anthony PRIME (Saint-James)`;
+      document.title = `Plombier Chauffagiste à ${city.name} — Anthony PRIME`;
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute("content", `Plombier, chauffagiste et électricien à ${city.name}. Intervention rapide par Anthony PRIME, basé à Saint-James (50240).`);
     }
   }, [city]);
 
   if (!city) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1 container py-24 text-center">
-          <h1 className="text-3xl mb-4">Ville non trouvée</h1>
-          <Link to="/" className="text-primary font-bold underline">Retour à l'accueil</Link>
-        </main>
-        <Footer />
-      </div>
-    );
+    // Backwards-compat: support old /plombier-:slug param name as well
+    return <Navigate to="/" replace />;
   }
 
   return (
@@ -60,7 +53,7 @@ const CityPage = () => {
               <MapPin className="h-4 w-4" /> {city.name}
             </div>
             <h1 className="text-4xl md:text-6xl max-w-4xl leading-tight">
-              Plombier, Chauffagiste & Électricien à {city.name}
+              Plombier Chauffagiste à {city.name}
             </h1>
             <p className="mt-5 text-lg md:text-xl text-primary-foreground/90 max-w-2xl">{city.intro}</p>
             <a
