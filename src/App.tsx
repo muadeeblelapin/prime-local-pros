@@ -25,6 +25,7 @@ const App = () => (
           <Route path="/plombier-:city" element={<CityPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
+          <Route path="/pompe-a-chaleur" element={<PompeAChaleur />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
