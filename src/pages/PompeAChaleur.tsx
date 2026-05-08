@@ -1,5 +1,5 @@
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Phone, CheckCircle2, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
