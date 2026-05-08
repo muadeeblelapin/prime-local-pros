@@ -11,7 +11,7 @@ const services: Service[] = [
 ];
 
 const specialties: Service[] = [
-  { icon: Thermometer, title: "Pompe à chaleur", desc: "Installation et entretien de PAC air/eau et air/air, éligibles aux aides.", to: "/services/pompe-a-chaleur" },
+  { icon: Thermometer, title: "Pompe à chaleur", desc: "Installation et entretien de PAC air/eau et air/air, éligibles aux aides.", to: "/pompe-a-chaleur" },
   { icon: Snowflake, title: "Aérothermie", desc: "Captez l'énergie de l'air pour chauffer votre maison.", to: "/services/aerothermie" },
   { icon: Mountain, title: "Géothermie", desc: "Une chaleur stable et durable issue du sol.", to: "/services/geothermie" },
   { icon: Bath, title: "Rénovation salle de bains", desc: "Conception sur-mesure et travaux clé en main.", to: "/services/renovation-salle-de-bains" },

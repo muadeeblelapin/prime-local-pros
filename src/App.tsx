@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import CityPage from "./pages/CityPage.tsx";
 import ServicePage from "./pages/ServicePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import PompeAChaleur from "./pages/PompeAChaleur";
 
 const queryClient = new QueryClient();
 
