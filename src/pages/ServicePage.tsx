@@ -33,7 +33,7 @@ type Service = {
   description: string;
   bullets: string[];
   icon: LucideIcon;
-  realizations: { title: string; location: string ; image?: string}[];
+  realizations: { title: string; location: string ; thumbnail?: string; fullImage?: string; image?: string;}[];
   showAids?: boolean;
   showBrands?: boolean;
   emergency?: boolean;
@@ -54,7 +54,7 @@ export const SERVICES: Record<string, Service> = {
     realizations: [
       { title: "Recherche de fuite", location: "Avranches (50)" },
       { title: "Pose chauffe-eau", location: "Saint-James (50)" },
-      { title: "Réalisation d'une salle de bains complette (+ murs et sol)", location: "Granville (50)", image: "/realisations/salle-de-bains-Granville.jpg" },
+      { title: "Réalisation d'une salle de bains complette (+ murs et sol)", location: "Granville (50)", thumbnail: "/realisations/salle-de-bains-Granville.webp", fullImage: "/realisations/salle-de-bains-Granville.jpg" },
     ],
   },
   chauffage: {
@@ -324,32 +324,6 @@ const ServicePage = () => {
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/*
-              {service.realizations.map((r, i) => (
-                <article
-                  key={i}
-                  className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
-                >*/}
-                  {/* Suppression de l'opacity-60 et du gradient qui masquaient l'image */}
-                 {/* <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
-                    <img
-                      src={r.image || "/placeholder.svg"}
-                      alt={`${r.title} — chantier ${r.location}`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6">
-                    {/* Badge de localisation stylé */} {/*
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-3">
-                      <MapPin className="h-3 w-3" /> {r.location}
-                    </div>
-                    <h3 className="text-lg font-bold text-card-foreground mb-1">{r.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Chantier réalisé avec soin par Anthony PRIME.
-                    </p>
-                  </div>
-                </article>
-              ))}
               */}
               {service.realizations.map((r, i) => (
                 <article
@@ -364,7 +338,7 @@ const ServicePage = () => {
                         aria-label={`Agrandir : ${r.title}`}
                       >
                         <img
-                          src={r.image || "/placeholder.svg"}
+                          src={r.thumbnail || "/placeholder.svg"}
                           alt={`${r.title} — chantier ${r.location}`}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           loading="lazy"
@@ -373,7 +347,7 @@ const ServicePage = () => {
                     </DialogTrigger>
                     <DialogContent className="max-w-5xl p-2 bg-background">
                       <img
-                        src={r.image || "/placeholder.svg"}
+                        src={r.fullImage || "/placeholder.svg"}
                         alt={`${r.title} — chantier ${r.location}`}
                         className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                       />
