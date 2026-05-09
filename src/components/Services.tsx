@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 type Service = { icon: LucideIcon; title: string; desc: string; to?: string };
 
 const services: Service[] = [
-  { icon: Droplets, title: "Plomberie", desc: "Rénovation de salle de bain, recherche de fuite, sanitaires, raccordements." },
-  { icon: Flame, title: "Chauffage", desc: "Installation et entretien de pompes à chaleur et chaudières (gaz, fioul, bois)." },
-  { icon: Zap, title: "Électricité", desc: "Mise en conformité, dépannage électrique, tableau, prises et éclairage." },
-  { icon: Wrench, title: "Dépannage d'urgence", desc: "Intervention rapide 7j/7 sur fuite, panne de chauffage ou coupure électrique." },
+  { icon: Droplets, title: "Plomberie", desc: "Rénovation de salle de bain, recherche de fuite, sanitaires, raccordements.", to: "/services/plomberie" },
+  { icon: Flame, title: "Chauffage", desc: "Installation et entretien de pompes à chaleur et chaudières (gaz, fioul, bois).", to: "/services/chauffage" },
+  { icon: Zap, title: "Électricité", desc: "Mise en conformité, dépannage électrique, tableau, prises et éclairage.", to: "/services/electricite" },
+  { icon: Wrench, title: "Dépannage d'urgence", desc: "Intervention rapide 7j/7 sur fuite, panne de chauffage ou coupure électrique.", to: "/services/depannage-urgence" },
 ];
 
 const specialties: Service[] = [
-  { icon: Thermometer, title: "Pompe à chaleur", desc: "Installation et entretien de PAC air/eau et air/air, éligibles aux aides.", to: "/pompe-a-chaleur" },
+  { icon: Thermometer, title: "Pompe à chaleur", desc: "Installation et entretien de PAC air/eau et air/air, éligibles aux aides.", to: "/services/pompe-a-chaleur" },
   { icon: Snowflake, title: "Aérothermie", desc: "Captez l'énergie de l'air pour chauffer votre maison.", to: "/services/aerothermie" },
   { icon: Mountain, title: "Géothermie", desc: "Une chaleur stable et durable issue du sol.", to: "/services/geothermie" },
   { icon: Bath, title: "Rénovation salle de bains", desc: "Conception sur-mesure et travaux clé en main.", to: "/services/renovation-salle-de-bains" },
@@ -28,14 +28,18 @@ const Services = () => (
         </p>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {services.map(({ icon: Icon, title, desc }) => (
-          <article key={title} className="group rounded-2xl border border-border bg-card p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300">
+        {services.map(({ icon: Icon, title, desc, to }) => (
+          <Link
+            key={title}
+            to={to!}
+            className="group rounded-2xl border border-border bg-card p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 block"
+          >
             <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground mb-5 group-hover:scale-110 transition-transform">
               <Icon className="h-7 w-7" />
             </div>
             <h3 className="text-xl text-card-foreground mb-2">{title}</h3>
             <p className="text-muted-foreground leading-relaxed">{desc}</p>
-          </article>
+          </Link>
         ))}
       </div>
 
