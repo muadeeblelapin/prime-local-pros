@@ -323,13 +323,14 @@ const ServicePage = () => {
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/*
               {service.realizations.map((r, i) => (
                 <article
                   key={i}
                   className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
-                >
+                >*/}
                   {/* Suppression de l'opacity-60 et du gradient qui masquaient l'image */}
-                  <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
+                 {/* <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
                     <img
                       src={r.image || "/placeholder.svg"}
                       alt={`${r.title} — chantier ${r.location}`}
@@ -337,7 +338,7 @@ const ServicePage = () => {
                     />
                   </div>
                   <div className="p-6">
-                    {/* Badge de localisation stylé */}
+                    {/* Badge de localisation stylé */} {/*
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-3">
                       <MapPin className="h-3 w-3" /> {r.location}
                     </div>
@@ -348,7 +349,8 @@ const ServicePage = () => {
                   </div>
                 </article>
               ))}
-              {/*{service.realizations.map((r, i) => (
+              */}
+              {service.realizations.map((r, i) => (
                 <article
                   key={i}
                   className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
@@ -370,7 +372,7 @@ const ServicePage = () => {
                     </p>
                   </div>
                 </article>
-              ))}*/}
+              ))}
             </div>
           </div>
         </section>
