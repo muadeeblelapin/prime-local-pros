@@ -357,7 +357,8 @@ const ServicePage = () => {
                 >
                   <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden">
                     <img
-                      src={r.image || "/placeholder.svg"}
+                      src={r.image ? `${window.location.origin}${r.image.startsWith('/') ? r.image : '/' + r.image}` : "/placeholder.svg"}
+                      {/*src={r.image || "/placeholder.svg"}*/}
                       alt={`${r.title} — chantier ${r.location}`}
                       className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"
                       />
