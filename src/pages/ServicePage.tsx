@@ -328,15 +328,37 @@ const ServicePage = () => {
                   key={i}
                   className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
                 >
-                 {/* <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden"> */}
-                 {/* Suppression de l'opacity-60 et du gradient qui masquaient l'image */}
+                  {/* Suppression de l'opacity-60 et du gradient qui masquaient l'image */}
                   <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
                     <img
                       src={r.image || "/placeholder.svg"}
                       alt={`${r.title} — chantier ${r.location}`}
-                      {/*className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"*/}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+                  </div>
+                  <div className="p-6">
+                    {/* Badge de localisation stylé */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-3">
+                      <MapPin className="h-3 w-3" /> {r.location}
+                    </div>
+                    <h3 className="text-lg font-bold text-card-foreground mb-1">{r.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Chantier réalisé avec soin par Anthony PRIME.
+                    </p>
+                  </div>
+                </article>
+              ))}
+              {/*{service.realizations.map((r, i) => (
+                <article
+                  key={i}
+                  className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden">
+                    <img
+                      src={r.image || "/placeholder.svg"}
+                      alt={`${r.title} — chantier ${r.location}`}
+                      className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"
+                      />
                   </div>
                   <div className="p-6">
                     <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground mb-3">
@@ -348,7 +370,7 @@ const ServicePage = () => {
                     </p>
                   </div>
                 </article>
-              ))}
+              ))}*/}
             </div>
           </div>
         </section>
