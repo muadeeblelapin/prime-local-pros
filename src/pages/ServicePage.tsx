@@ -53,7 +53,7 @@ export const SERVICES: Record<string, Service> = {
     realizations: [
       { title: "Recherche de fuite", location: "Avranches (50)" },
       { title: "Pose chauffe-eau", location: "Saint-James (50)" },
-      { title: "Création réseau sanitaire", location: "Pontorson (50)" },
+      { title: "Réalisation d'une salle de bains complette (+ murs et sol)", location: "Granville (50)", image: "/realisations/salle-de-bains-Granville.jpg" },
     ],
   },
   chauffage: {
