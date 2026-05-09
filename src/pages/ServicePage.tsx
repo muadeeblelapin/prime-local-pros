@@ -328,11 +328,14 @@ const ServicePage = () => {
                   key={i}
                   className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden">
+                 {/* <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden"> */}
+                 {/* Suppression de l'opacity-60 et du gradient qui masquaient l'image */}
+                  <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
                     <img
                       src={r.image || "/placeholder.svg"}
                       alt={`${r.title} — chantier ${r.location}`}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"
+                      {/*className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"*/}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   <div className="p-6">
