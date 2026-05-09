@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,7 +7,6 @@ import Index from "./pages/Index.tsx";
 import CityPage from "./pages/CityPage.tsx";
 import ServicePage from "./pages/ServicePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import PompeAChaleur from "./pages/PompeAChaleur";
 
 const queryClient = new QueryClient();
 
@@ -23,9 +22,9 @@ const App = () => (
           <Route path="/services/:serviceName" element={<ServicePage />} />
           {/* Backwards compatibility */}
           <Route path="/plombier-:city" element={<CityPage />} />
+          <Route path="/pompe-a-chaleur" element={<Navigate to="/services/pompe-a-chaleur" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
-          <Route path="/pompe-a-chaleur" element={<PompeAChaleur />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

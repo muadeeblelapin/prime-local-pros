@@ -28,14 +28,18 @@ const Services = () => (
         </p>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {services.map(({ icon: Icon, title, desc }) => (
-          <article key={title} className="group rounded-2xl border border-border bg-card p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300">
+        {services.map(({ icon: Icon, title, desc, to }) => (
+          <Link
+            key={title}
+            to={to!}
+            className="group rounded-2xl border border-border bg-card p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 block"
+          >
             <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground mb-5 group-hover:scale-110 transition-transform">
               <Icon className="h-7 w-7" />
             </div>
             <h3 className="text-xl text-card-foreground mb-2">{title}</h3>
             <p className="text-muted-foreground leading-relaxed">{desc}</p>
-          </article>
+          </Link>
         ))}
       </div>
 
