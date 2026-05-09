@@ -39,7 +39,7 @@ type Service = {
     location: string;
     image?: string;
     thumbnail?: string;
-    fullSize?: string;
+    fullImage?: string;
   }[];
   showAids?: boolean;
   showBrands?: boolean;
@@ -65,7 +65,7 @@ export const SERVICES: Record<string, Service> = {
         title: "Réalisation d'une salle de bains complette (+ murs et sol)",
         location: "Granville (50)",
         thumbnail: "/realisations/salle-de-bains-Granville.jpg",
-        fullSize: "/realisations/salle-de-bains-Granville.jpg",
+        fullImage: "/realisations/salle-de-bains-Granville.jpg",
       },
     ],
   },
@@ -365,19 +365,12 @@ const ServicePage = () => {
               */}
               {service.realizations.map((r, i) => {
                 const thumb = r.thumbnail || r.image || "/placeholder.svg";
-                const full = r.fullSize || r.image || r.thumbnail || "/placeholder.svg";
+                const full = r.fullImage || r.image || r.thumbnail || "/placeholder.svg";
                 return (
-                  <article
-                    key={i}
-                    className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
-                  >
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <button
-                          type="button"
-                          className="relative block w-full aspect-video bg-muted overflow-hidden cursor-zoom-in"
-                          aria-label={`Agrandir l'image : ${r.title}`}
-                        >
+                  <Dialog key={i}>
+                    <DialogTrigger asChild>
+                      <article className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                        <div className="relative block w-full aspect-video bg-muted overflow-hidden">
                           <img
                             src={thumb}
                             alt={`${r.title} — chantier ${r.location}`}
@@ -393,27 +386,27 @@ const ServicePage = () => {
                           <div className="absolute top-3 right-3 md:hidden rounded-full bg-secondary/95 text-secondary-foreground p-2 shadow-cta">
                             <ZoomIn className="h-4 w-4" />
                           </div>
-                        </button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-[95vw] md:max-w-6xl p-2 sm:p-4 bg-background border-0 sm:rounded-xl">
-                        <img
-                          src={full}
-                          alt={`${r.title} — chantier ${r.location}`}
-                          className="w-full h-auto max-h-[88vh] object-contain rounded-lg"
-                          loading="eager"
-                        />
-                        <p className="text-center text-sm text-muted-foreground mt-1 inline-flex items-center justify-center gap-1 w-full">
-                          <MapPin className="h-4 w-4" /> {r.title} — {r.location}
-                        </p>
-                      </DialogContent>
-                    </Dialog>
-                    <div className="p-6">
-                      <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
-                      <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
-                        <MapPin className="h-4 w-4" /> {r.location}
+                        </div>
+                        <div className="p-6">
+                          <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
+                          <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
+                            <MapPin className="h-4 w-4" /> {r.location}
+                          </p>
+                        </div>
+                      </article>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-[95vw] md:max-w-6xl p-2 sm:p-4 bg-background border-0 sm:rounded-xl">
+                      <img
+                        src={full}
+                        alt={`${r.title} — chantier ${r.location}`}
+                        className="w-full h-auto max-h-[88vh] object-contain rounded-lg"
+                        loading="eager"
+                      />
+                      <p className="text-center text-sm text-muted-foreground mt-1 inline-flex items-center justify-center gap-1 w-full">
+                        <MapPin className="h-4 w-4" /> {r.title} — {r.location}
                       </p>
-                    </div>
-                  </article>
+                    </DialogContent>
+                  </Dialog>
                 );
               })}
             </div>
