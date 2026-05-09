@@ -21,6 +21,7 @@ import {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import heroImg from "@/assets/hero-plumbing.jpg";
 
 const PHONE = "06 74 98 15 99";
@@ -355,13 +356,29 @@ const ServicePage = () => {
                   key={i}
                   className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden">
-                    <img
-                      src={r.image ? `${window.location.origin}${r.image.startsWith('/') ? r.image : '/' + r.image}` : "/placeholder.svg"}
-                      alt={`${r.title} — chantier ${r.location}`}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="block w-full aspect-video bg-muted overflow-hidden cursor-zoom-in"
+                        aria-label={`Agrandir : ${r.title}`}
+                      >
+                        <img
+                          src={r.image || "/placeholder.svg"}
+                          alt={`${r.title} — chantier ${r.location}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-5xl p-2 bg-background">
+                      <img
+                        src={r.image || "/placeholder.svg"}
+                        alt={`${r.title} — chantier ${r.location}`}
+                        className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                       />
-                  </div>
+                    </DialogContent>
+                  </Dialog>
                   <div className="p-6">
                     <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
                     <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
