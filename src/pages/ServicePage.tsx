@@ -16,13 +16,11 @@ import {
   Snowflake,
   Mountain,
   Bath,
-  ZoomIn,
   type LucideIcon,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import heroImg from "@/assets/hero-plumbing.jpg";
 
 const PHONE = "06 74 98 15 99";
@@ -34,13 +32,7 @@ type Service = {
   description: string;
   bullets: string[];
   icon: LucideIcon;
-  realizations: {
-    title: string;
-    location: string;
-    image?: string;
-    thumbnail?: string;
-    fullImage?: string;
-  }[];
+  realizations: { title: string; location: string ; image?: string}[];
   showAids?: boolean;
   showBrands?: boolean;
   emergency?: boolean;
@@ -61,12 +53,7 @@ export const SERVICES: Record<string, Service> = {
     realizations: [
       { title: "Recherche de fuite", location: "Avranches (50)" },
       { title: "Pose chauffe-eau", location: "Saint-James (50)" },
-      {
-        title: "Réalisation d'une salle de bains complette (+ murs et sol)",
-        location: "Granville (50)",
-        thumbnail: "/realisations/salle-de-bains-Granville.jpg",
-        fullImage: "/realisations/salle-de-bains-Granville.jpg",
-      },
+      { title: "Réalisation d'une salle de bains complette (+ murs et sol)", location: "Granville (50)",r.thumbnail: "/realisations/salle-de-bains-Granville.wbep", r.fullImage: "/realisations/salle-de-bains-Granville.jpg" },
     ],
   },
   chauffage: {
@@ -336,79 +323,29 @@ const ServicePage = () => {
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/*
               {service.realizations.map((r, i) => (
                 <article
                   key={i}
                   className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
-                >*/}
-                  {/* Suppression de l'opacity-60 et du gradient qui masquaient l'image */}
-                 {/* <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
+                >
+                  <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden">
                     <img
-                      src={r.image || "/placeholder.svg"}
+                      src={r.image ? `${window.location.origin}${r.image.startsWith('/') ? r.image : '/' + r.image}` : "/placeholder.svg"}
                       alt={`${r.title} — chantier ${r.location}`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                      className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"
+                      />
                   </div>
                   <div className="p-6">
-                    {/* Badge de localisation stylé */} {/*
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-3">
-                      <MapPin className="h-3 w-3" /> {r.location}
-                    </div>
-                    <h3 className="text-lg font-bold text-card-foreground mb-1">{r.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Chantier réalisé avec soin par Anthony PRIME.
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground mb-3">
+                      <Icon className="h-5 w-5" /> {r.location}
+                    </div> 
+                    <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
+                    <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
+                      <MapPin className="h-4 w-4" /> {r.location}
                     </p>
                   </div>
                 </article>
               ))}
-              */}
-              {service.realizations.map((r, i) => {
-                const thumb = r.thumbnail || r.image || "/placeholder.svg";
-                const full = r.fullImage || r.image || r.thumbnail || "/placeholder.svg";
-                return (
-                  <Dialog key={i}>
-                    <DialogTrigger asChild>
-                      <article className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                        <div className="relative block w-full aspect-video bg-muted overflow-hidden">
-                          <img
-                            src={thumb}
-                            alt={`${r.title} — chantier ${r.location}`}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            loading="lazy"
-                            decoding="async"
-                          />
-                          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/30 transition-colors duration-300 flex items-center justify-center">
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full bg-secondary text-secondary-foreground p-3 shadow-cta">
-                              <ZoomIn className="h-6 w-6" />
-                            </div>
-                          </div>
-                          <div className="absolute top-3 right-3 md:hidden rounded-full bg-secondary/95 text-secondary-foreground p-2 shadow-cta">
-                            <ZoomIn className="h-4 w-4" />
-                          </div>
-                        </div>
-                        <div className="p-6">
-                          <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
-                          <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
-                            <MapPin className="h-4 w-4" /> {r.location}
-                          </p>
-                        </div>
-                      </article>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-[95vw] md:max-w-6xl p-2 sm:p-4 bg-background border-0 sm:rounded-xl">
-                      <img
-                        src={full}
-                        alt={`${r.title} — chantier ${r.location}`}
-                        className="w-full h-auto max-h-[88vh] object-contain rounded-lg"
-                        loading="eager"
-                      />
-                      <p className="text-center text-sm text-muted-foreground mt-1 inline-flex items-center justify-center gap-1 w-full">
-                        <MapPin className="h-4 w-4" /> {r.title} — {r.location}
-                      </p>
-                    </DialogContent>
-                  </Dialog>
-                );
-              })}
             </div>
           </div>
         </section>
