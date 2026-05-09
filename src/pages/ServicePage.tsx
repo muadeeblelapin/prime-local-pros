@@ -16,6 +16,7 @@ import {
   Snowflake,
   Mountain,
   Bath,
+  ZoomIn,
   type LucideIcon,
 } from "lucide-react";
 import Header from "@/components/Header";
@@ -33,7 +34,13 @@ type Service = {
   description: string;
   bullets: string[];
   icon: LucideIcon;
-  realizations: { title: string; location: string ; image?: string}[];
+  realizations: {
+    title: string;
+    location: string;
+    image?: string;
+    thumbnail?: string;
+    fullSize?: string;
+  }[];
   showAids?: boolean;
   showBrands?: boolean;
   emergency?: boolean;
@@ -54,7 +61,12 @@ export const SERVICES: Record<string, Service> = {
     realizations: [
       { title: "Recherche de fuite", location: "Avranches (50)" },
       { title: "Pose chauffe-eau", location: "Saint-James (50)" },
-      { title: "Réalisation d'une salle de bains complette (+ murs et sol)", location: "Granville (50)", image: "/realisations/salle-de-bains-Granville.jpg" },
+      {
+        title: "Réalisation d'une salle de bains complette (+ murs et sol)",
+        location: "Granville (50)",
+        thumbnail: "/realisations/salle-de-bains-Granville.jpg",
+        fullSize: "/realisations/salle-de-bains-Granville.jpg",
+      },
     ],
   },
   chauffage: {
@@ -351,42 +363,59 @@ const ServicePage = () => {
                 </article>
               ))}
               */}
-              {service.realizations.map((r, i) => (
-                <article
-                  key={i}
-                  className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
-                >
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <button
-                        type="button"
-                        className="block w-full aspect-video bg-muted overflow-hidden cursor-zoom-in"
-                        aria-label={`Agrandir : ${r.title}`}
-                      >
+              {service.realizations.map((r, i) => {
+                const thumb = r.thumbnail || r.image || "/placeholder.svg";
+                const full = r.fullSize || r.image || r.thumbnail || "/placeholder.svg";
+                return (
+                  <article
+                    key={i}
+                    className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <button
+                          type="button"
+                          className="relative block w-full aspect-video bg-muted overflow-hidden cursor-zoom-in"
+                          aria-label={`Agrandir l'image : ${r.title}`}
+                        >
+                          <img
+                            src={thumb}
+                            alt={`${r.title} — chantier ${r.location}`}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/30 transition-colors duration-300 flex items-center justify-center">
+                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full bg-secondary text-secondary-foreground p-3 shadow-cta">
+                              <ZoomIn className="h-6 w-6" />
+                            </div>
+                          </div>
+                          <div className="absolute top-3 right-3 md:hidden rounded-full bg-secondary/95 text-secondary-foreground p-2 shadow-cta">
+                            <ZoomIn className="h-4 w-4" />
+                          </div>
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-[95vw] md:max-w-6xl p-2 sm:p-4 bg-background border-0 sm:rounded-xl">
                         <img
-                          src={r.image || "/placeholder.svg"}
+                          src={full}
                           alt={`${r.title} — chantier ${r.location}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading="lazy"
+                          className="w-full h-auto max-h-[88vh] object-contain rounded-lg"
+                          loading="eager"
                         />
-                      </button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-5xl p-2 bg-background">
-                      <img
-                        src={r.image || "/placeholder.svg"}
-                        alt={`${r.title} — chantier ${r.location}`}
-                        className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
-                      />
-                    </DialogContent>
-                  </Dialog>
-                  <div className="p-6">
-                    <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
-                    <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
-                      <MapPin className="h-4 w-4" /> {r.location}
-                    </p>
-                  </div>
-                </article>
-              ))}
+                        <p className="text-center text-sm text-muted-foreground mt-1 inline-flex items-center justify-center gap-1 w-full">
+                          <MapPin className="h-4 w-4" /> {r.title} — {r.location}
+                        </p>
+                      </DialogContent>
+                    </Dialog>
+                    <div className="p-6">
+                      <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
+                      <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
+                        <MapPin className="h-4 w-4" /> {r.location}
+                      </p>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
