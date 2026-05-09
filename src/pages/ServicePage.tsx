@@ -337,7 +337,7 @@ const ServicePage = () => {
                   </div>
                   <div className="p-6">
                     <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground mb-3">
-                      <Icon className="h-5 w-5" />
+                      <Icon className="h-5 w-5" /> {r.location}
                     </div>
                     <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
                     <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
