@@ -21,6 +21,7 @@ import {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import heroImg from "@/assets/hero-plumbing.jpg";
 
 const PHONE = "06 74 98 15 99";
@@ -349,17 +350,16 @@ const ServicePage = () => {
                         alt={`${r.title} — chantier ${r.location}`}
                         className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                       />
-                  </div>
+                    </DialogContent>
+                  </Dialog>
                   <div className="p-6">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground mb-3">
-                      <Icon className="h-5 w-5" /> {r.location}
-                    </div> 
                     <h3 className="text-lg text-card-foreground mb-1">{r.title}</h3>
                     <p className="text-sm text-muted-foreground inline-flex items-center gap-1">
                       <MapPin className="h-4 w-4" /> {r.location}
                     </p>
                   </div>
                 </article>
+              ))}
             </div>
           </div>
         </section>
