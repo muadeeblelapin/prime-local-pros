@@ -32,7 +32,7 @@ type Service = {
   description: string;
   bullets: string[];
   icon: LucideIcon;
-  realizations: { title: string; location: string ; image?: string}[];
+  realizations: { title: string; location: string ; thumbnail?: string; fullImage?: string; image?: string;}[];
   showAids?: boolean;
   showBrands?: boolean;
   emergency?: boolean;
@@ -53,7 +53,7 @@ export const SERVICES: Record<string, Service> = {
     realizations: [
       { title: "Recherche de fuite", location: "Avranches (50)" },
       { title: "Pose chauffe-eau", location: "Saint-James (50)" },
-      { title: "Réalisation d'une salle de bains complette (+ murs et sol)", location: "Granville (50)", thumbnail: "/realisations/salle-de-bains-Granville.wbep", fullImage: "/realisations/salle-de-bains-Granville.jpg" },
+      { title: "Réalisation d'une salle de bains complette (+ murs et sol)", location: "Granville (50)", thumbnail: "/realisations/salle-de-bains-Granville.webp", fullImage: "/realisations/salle-de-bains-Granville.jpg" },
     ],
   },
   chauffage: {
@@ -328,11 +328,26 @@ const ServicePage = () => {
                   key={i}
                   className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="aspect-video bg-gradient-primary/10 flex items-center justify-center overflow-hidden">
-                    <img
-                      src={r.image ? `${window.location.origin}${r.image.startsWith('/') ? r.image : '/' + r.image}` : "/placeholder.svg"}
-                      alt={`${r.title} — chantier ${r.location}`}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="block w-full aspect-video bg-muted overflow-hidden cursor-zoom-in"
+                        aria-label={`Agrandir : ${r.title}`}
+                      >
+                        <img
+                          src={r.thumbnail || "/placeholder.svg"}
+                          alt={`${r.title} — chantier ${r.location}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-5xl p-2 bg-background">
+                      <img
+                        src={r.fullImage || "/placeholder.svg"}
+                        alt={`${r.title} — chantier ${r.location}`}
+                        className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                       />
                   </div>
                   <div className="p-6">
@@ -345,7 +360,6 @@ const ServicePage = () => {
                     </p>
                   </div>
                 </article>
-              ))}
             </div>
           </div>
         </section>
